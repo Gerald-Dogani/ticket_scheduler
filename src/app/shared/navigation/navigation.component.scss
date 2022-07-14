@@ -1,0 +1,28 @@
+:host{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+mat-drawer{
+  transform: translate3d(0, 0 , 0) !important;
+  width : 300px;
+  transition-property: transform,margin-left,margin-right;
+}
+mat-drawer-container{
+  height: 100%;
+
+}
+mat-drawer-content{
+  padding: 20px;
+  margin-left: 60px;
+  height: -webkit-fill-available;
+}
+
+mat-drawer:not(.mat-drawer-opened) {
+  transform: translate3d(0, 0 , 0) !important;
+  visibility: visible !important;
+  width: 64px !important;
+  overflow: hidden !important;
+  transition-property: transform,margin-left,margin-right;
+}

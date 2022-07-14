@@ -1,1 +1,20 @@
-<p>header works!</p>
+<mat-toolbar>
+  <mat-toolbar-row class="navigation-header">
+    <div class="header-start">
+      <button mat-button  (click)="drawer.toggle()"><mat-icon>menu</mat-icon></button>
+    </div>
+    <div>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>person_outline</mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu">
+        <button style="color: black" mat-menu-item>
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Sign out</span>
+        </button>
+      </mat-menu>
+
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

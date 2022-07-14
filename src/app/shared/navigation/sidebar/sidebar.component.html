@@ -1,1 +1,13 @@
-<p>sidebar works!</p>
+<mat-nav-list xmlns="http://www.w3.org/1999/html">
+  <div class="profile-card" >
+    <div class="header" *ngIf="isOpen">
+      <h2>Welcome </h2>
+    </div>
+    <br/>
+  </div>
+  <mat-divider></mat-divider>
+  <a routerLinkActive="list-item-active" routerLink="./home/"><mat-list-item><mat-icon mat-list-icon>home </mat-icon><h4 mat-line *ngIf="isOpen"> &nbsp; Home </h4></mat-list-item></a>
+  <a routerLinkActive="list-item-active" routerLink="./list/"><mat-list-item><mat-icon mat-list-icon>assignment</mat-icon><h4 mat-line *ngIf="isOpen"> &nbsp; Applications</h4></mat-list-item></a>
+  <a routerLinkActive="list-item-active" routerLink="./jobs/"><mat-list-item><mat-icon mat-list-icon>work_outline</mat-icon><h4 mat-line *ngIf="isOpen"> &nbsp; Job Vacancy</h4></mat-list-item></a>
+</mat-nav-list>
+
