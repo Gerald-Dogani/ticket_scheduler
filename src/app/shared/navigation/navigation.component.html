@@ -1,1 +1,13 @@
-<p>navigation works!</p>
+<app-header [drawer]="drawer"></app-header>
+<mat-drawer-container class="example-container " >
+
+  <mat-drawer #drawer mode="side" opened>
+    <app-sidebar [isOpen]="drawer.opened"></app-sidebar>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+
+</mat-drawer-container>
+<app-footer></app-footer>

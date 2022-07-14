@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {NavigationComponent} from "./shared/navigation/navigation.component";
 
 const routes: Routes = [
-  {path: 'admin', component: NavigationComponent, children:[
+  {path: '', component: NavigationComponent, children:[
       // {path : '' ,  loadChildren: () => import('./agent/agent.module').then(m => m.AgentModule)},
     ],
   },

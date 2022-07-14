@@ -1,0 +1,23 @@
+.navigation-header{
+  display: flex;
+  justify-content: space-between;
+  padding-inline-start: 0;
+}
+.header-start{
+  display: flex;
+}
+
+.navigation-header img {
+  width: 180px;
+  position: relative;
+  top: -4px;
+  right: -20px;
+}
+
+mat-toolbar{
+  background-color: #192D57;
+}
+
+button{
+  color: white;
+}
