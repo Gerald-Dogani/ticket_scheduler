@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "./dist",
+    "public": "./dist/ticket_scheduler",
     "ignore": [
       "firebase.json",
       "**/.*",
