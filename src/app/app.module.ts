@@ -18,6 +18,7 @@ import { SignInComponent } from './core/components/sign-in/sign-in.component';
 import { SignUpComponent } from './core/components/sign-up/sign-up.component';
 import { ForgotPasswordComponent } from './core/components/forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './core/components/verify-email/verify-email.component';
+import {CoreRoutingModule} from "./core/core-routing.module";
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { VerifyEmailComponent } from './core/components/verify-email/verify-emai
     NavigationComponent,
   ],
   imports: [
+    CoreRoutingModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

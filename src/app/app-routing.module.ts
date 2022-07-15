@@ -3,11 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import {NavigationComponent} from "./shared/navigation/navigation.component";
 
 const routes: Routes = [
-  {path: '', component: NavigationComponent, children:[
+  {path : '' ,  loadChildren: () => import('./core/core.module').then(m => m.CoreModule)},
+  {path: '-', component: NavigationComponent, children:[
       // {path : '' ,  loadChildren: () => import('./agent/agent.module').then(m => m.AgentModule)},
     ],
   },
-  {path: '**', redirectTo: '', pathMatch: 'full'},
+  { path: '**', redirectTo: '/sign-in', pathMatch: 'full' },
 ]
 
 
