@@ -20,6 +20,10 @@ yarn-error.log
 .settings/
 *.sublime-workspace
 
+.angular
+.firebase
+.github
+
 # Visual Studio Code
 .vscode/*
 .vscode
