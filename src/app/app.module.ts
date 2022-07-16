@@ -6,28 +6,22 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
-import {NavigationComponent} from "./shared/navigation/navigation.component";
-import {NavigationModule} from "./shared/navigation/navigation.module";
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
-import { DashboardComponent } from './core/components/dashboard/dashboard.component';
-import { SignInComponent } from './core/components/sign-in/sign-in.component';
-import { SignUpComponent } from './core/components/sign-up/sign-up.component';
-import { ForgotPasswordComponent } from './core/components/forgot-password/forgot-password.component';
-import { VerifyEmailComponent } from './core/components/verify-email/verify-email.component';
-import {CoreRoutingModule} from "./core/core-routing.module";
+import {RouterModule} from "@angular/router";
+import {CoreModule} from "@core/core.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent,
   ],
   imports: [
-    CoreRoutingModule,
     BrowserModule,
+    RouterModule,
+    CoreModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, 'ticket_scheduler'),
@@ -41,9 +35,9 @@ import {CoreRoutingModule} from "./core/core-routing.module";
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    NavigationModule
   ],
   providers: [],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

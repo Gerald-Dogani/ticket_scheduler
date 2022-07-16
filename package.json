@@ -1,6 +1,6 @@
 {
   "name": "ticket-scheduler",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -16,15 +16,20 @@
     "@angular/compiler": "^14.0.0",
     "@angular/core": "^14.0.0",
     "@angular/fire": "^7.4.1",
+    "@angular/flex-layout": "^14.0.0-beta.40",
     "@angular/forms": "^14.0.0",
     "@angular/material": "^14.0.5",
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
     "@angular/service-worker": "^14.0.0",
+    "angular": "^1.8.3",
     "firebase": "^9.9.0",
+    "node": "^18.5.0",
+    "node-sass": "^7.0.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
+    "tslint-angular": "^3.0.3",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
