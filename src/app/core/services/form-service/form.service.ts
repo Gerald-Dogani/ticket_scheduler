@@ -14,4 +14,11 @@ export class FormService {
       password: new FormControl('', Validators.required),
     })
   }
+
+  initSignUp(): FormGroup{
+    return this.fb.group({
+      email: new FormControl('',[Validators.required, Validators.email]),
+      password: new FormControl('', Validators.required),
+    })
+  }
 }
