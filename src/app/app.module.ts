@@ -13,6 +13,10 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
 import {RouterModule} from "@angular/router";
 import {CoreModule} from "@core/core.module";
+import {NgxSpinnerModule} from "ngx-spinner";
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { HotToastModule } from '@ngneat/hot-toast';
 
 @NgModule({
   declarations: [
@@ -22,6 +26,7 @@ import {CoreModule} from "@core/core.module";
     BrowserModule,
     RouterModule,
     CoreModule,
+    NgxSpinnerModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, 'ticket_scheduler'),
@@ -35,6 +40,9 @@ import {CoreModule} from "@core/core.module";
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    HotToastModule.forRoot(),
   ],
   providers: [],
   exports: [],

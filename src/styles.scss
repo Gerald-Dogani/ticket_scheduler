@@ -1,4 +1,3 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
@@ -35,5 +34,202 @@ $ticket_scheduler-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+.spinner mat-icon {
+  display: none;
+}
+
+.spinner {
+  position: relative;
+  padding-left: 40px !important;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.login {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #313f53;
+}
+
+
+.login * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.mat-card {
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+//Auth part
+
+.login-container {
+  width: auto;
+  height: auto;
+  position: relative;
+  background-color: white;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.login .company-name-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  text-align: center;
+  padding: 30px 20px;
+  position: relative;
+}
+
+.login .company-name-login:before {
+  content: "";
+  width: 80%;
+  height: 2px;
+  background-color: #7d85a0;
+  position: absolute;
+  left: 10%;
+  bottom: 20px;
+}
+
+.company-name-login img {
+  width: 35%;
+  margin: 0 auto 20px auto;
+  padding: 10px;
+  border-radius: 2px;
+}
+
+.login-body {
+  position: relative;
+  width: 100%;
+}
+
+.login .login-icons {
+  width: 100%;
+  height: auto;
+  padding: 30px 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.login .login-forms {
+  width: 100%;
+  padding: 5px 30px 20px 30px;
+  position: relative;
+}
+
+.login-forms > div {
+  width: 320px;
+  padding: 8px 0;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.login-forms .input-icon {
+  padding: 0 15PX;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.login-forms .input-icon img {
+  width: 25px;
+  margin-bottom: 4px;
+}
+
+.login-forms .input-form {
+  width: 100%;
+  padding: 0 25px;
+}
+
+.login-forms .input-form input {
+  height: 100%;
+  width: 100%;
+  padding-bottom: 3px;
+  color: rgb(125, 133, 160);
+}
+
+::placeholder {
+  color: rgb(167, 177, 209);
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 50px white inset;
+  -webkit-text-fill-color: rgb(125, 133, 160);
+}
+
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 50px white inset;
+  -webkit-text-fill-color: rgb(125, 133, 160);
+}
+
+.login-button {
+  width: 100%;
+  position: relative;
+}
+
+.login-button button {
+  width: 80%;
+  height: 100%;
+  color: white;
+  background-color: #0747a6;
+  border: unset;
+  border-radius: 5px;
+  padding: 10px 0;
+  font-size: 24px;
+  font-weight: 100;
+  position: relative;
+  left: 10%;
+  margin-bottom: 30px;
+}
+
+.login .company-link {
+  margin: 20px 0;
+  font-size: 1em;
+  line-height: normal;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.login .company-link a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, .4);
+  cursor: pointer;
+
+  img {
+    content: "";
+    width: 80%;
+    height: 20px;
+    position: absolute;
+    left: 10%;
+    bottom: 10%;
+  }
+}
+
+//end Auth part

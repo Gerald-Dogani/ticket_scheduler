@@ -68,7 +68,7 @@ const MaterialModules = [
   imports: [
     CommonModule,
     RouterModule,
-    MaterialModules
+    ...MaterialModules
   ]
 })
 export class CoreModule {

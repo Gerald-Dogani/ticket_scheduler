@@ -4,14 +4,14 @@
   padding-inline-start: 0;
 }
 .header-start{
+  width: 30%;
   display: flex;
+  justify-content: space-between;
 }
 
 .navigation-header img {
-  width: 180px;
-  position: relative;
-  top: -4px;
-  right: -20px;
+  width: 130px;
+  margin-top: 7px;
 }
 
 mat-toolbar{
