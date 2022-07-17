@@ -1,5 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDrawer} from "@angular/material/sidenav";
+import {AuthService} from "@core/services/auth-service/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-navigation',
@@ -10,9 +12,13 @@ export class NavigationComponent implements OnInit {
 
   @ViewChild('drawer') public drawer!: MatDrawer;
 
-  constructor() { }
+  constructor(private route: Router, private authService: AuthService,) { }
 
   ngOnInit(): void {
   }
 
+  logout() {
+    this.authService.logout();
+    this.route.navigate(['login']);
+  }
 }
