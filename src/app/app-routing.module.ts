@@ -9,7 +9,7 @@ const routes: Routes = [
       // {path : '' ,  loadChildren: () => import('./agent/agent.module').then(m => m.AgentModule)},
     ],
   },
-  { path: '**', redirectTo: '/sign-in', pathMatch: 'full' },
+  { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ]
 
 
