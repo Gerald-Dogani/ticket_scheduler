@@ -4,9 +4,9 @@ export class MenuItem {
   }
 }
 
-const DASHBOARD_ICON = './assets/menu-icons/dashboard.svg/';
-const TICKET_LIST_ICON = './assets/menu-icons/ticket-list.svg/';
-const CREATE_TICKET_ICON = './assets/menu-icons/create-ticket.svg/';
+const DASHBOARD_ICON = './assets/menu-icons/dashboard.svg';
+const TICKET_LIST_ICON = './assets/menu-icons/ticket-list.svg';
+const CREATE_TICKET_ICON = './assets/menu-icons/create-ticket.svg';
 
 
 
