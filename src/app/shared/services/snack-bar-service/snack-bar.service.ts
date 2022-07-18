@@ -13,9 +13,9 @@ export class SnackBarService {
   constructor(private loader: NgxSpinnerService, private snackBar: MatSnackBar, private router: Router) { }
 
 
-  onSuccess(): void {
+  onSuccess(message?:string): void {
     this.loader.show();
-    this.snackBar.open('Action finish with success!', 'Close', {
+    this.snackBar.open(message? message : 'Action finish with success!', 'Close', {
       duration: 3000,
       panelClass: 'success-snackbar'
     });

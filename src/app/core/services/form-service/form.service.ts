@@ -21,4 +21,10 @@ export class FormService {
       password: new FormControl('', Validators.required),
     })
   }
+
+  initForgetPw(): FormGroup{
+    return this.fb.group({
+      email: new FormControl('',[Validators.required, Validators.email]),
+    })
+  }
 }

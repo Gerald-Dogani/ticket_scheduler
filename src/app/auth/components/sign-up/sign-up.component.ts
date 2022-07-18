@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LUFTHANSA_IMAGE} from "@shared/cons";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -49,10 +49,10 @@ export class SignUpComponent implements OnInit {
     if (this.signUpForm.valid) {
       this.loader.show();
       const {email, password} = this.signUpForm.value;
-      this.authService.login(email, password).pipe(
+      this.authService.signUp(email, password).pipe(
         this.toast.observe({
-          success: 'Signed in successfully',
-          loading: 'Signing in...',
+          success: 'Signed up successfully',
+          loading: 'Creating account...',
           error: 'There was an error',
         })
       ).subscribe({

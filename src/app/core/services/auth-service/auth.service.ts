@@ -1,6 +1,11 @@
 import {Injectable, NgZone, Optional, SkipSelf} from '@angular/core';
-import {Auth, sendPasswordResetEmail, signInWithEmailAndPassword} from "@angular/fire/auth";
-import {BehaviorSubject, from, map, Observable} from "rxjs";
+import {
+  Auth,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword
+} from "@angular/fire/auth";
+import {BehaviorSubject, from, Observable} from "rxjs";
 import {AuthToken} from "@core/models/models";
 import {HttpBackend, HttpClient} from "@angular/common/http";
 import {CookieService} from "@core/services/auth-service/cookie.service";
@@ -9,15 +14,15 @@ import {NgxPermissionsService, NgxRolesService} from "ngx-permissions";
 import {AUTH_ENDPOINT} from "@shared/endpoints";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/compat/firestore";
-import {getToken} from "@angular/fire/app-check";
 import {User} from "@shared/entities/UserInterface";
+import {SnackBarService} from "@shared/services/snack-bar-service/snack-bar.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  userData:any;
-  credentialData:any;
+  userData: any;
+  credentialData: any;
   private currentTokenSubject: BehaviorSubject<AuthToken>;
   private httpWithoutInterceptor;
   today = new Date();
@@ -26,7 +31,7 @@ export class AuthService {
 
   constructor(private auth: Auth, private http: HttpClient, private httpBackEnd: HttpBackend, private cookieService: CookieService,
               private router: Router, public ngZone: NgZone, public afAuth: AngularFireAuth, public afs: AngularFirestore,
-              private permissionsService: NgxPermissionsService, private rolesService: NgxRolesService,
+              private permissionsService: NgxPermissionsService, private rolesService: NgxRolesService, private snackBar: SnackBarService,
               @Optional() @SkipSelf() singletonService?: AuthService) {
 
     if (singletonService) {
@@ -69,9 +74,11 @@ export class AuthService {
   }
 
   SetUserData(user: any) {
+
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
+    console.log(userRef)
     const userData: User = {
       uid: user.uid,
       email: user.email,
@@ -84,18 +91,17 @@ export class AuthService {
     });
   }
 
-  SignUp(email: string, password: string) {
-    return this.afAuth
-      .createUserWithEmailAndPassword(email, password)
-      .then((result) => {
-        /* Call the SendVerificaitonMail() function when new user sign
-        up and returns promise */
-        this.SendVerificationMail();
-        this.SetUserData(result.user);
-      })
+  signUp(email: string, password: string) {
+    return from(createUserWithEmailAndPassword(this.auth, email, password).then((result) => {
+      /* Call the SendVerificaitonMail() function when new user sign
+      up and returns promise */
+      this.SendVerificationMail();
+      this.SetUserData(result.user)
+      console.log(result)
+    })
       .catch((error) => {
         window.alert(error.message);
-      });
+      }))
   }
 
   public logout() {

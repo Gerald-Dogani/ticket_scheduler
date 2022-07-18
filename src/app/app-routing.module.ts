@@ -5,7 +5,7 @@ import {AuthGuard} from "@core/guards/auth.guard";
 
 const routes: Routes = [
   // {path : '' ,  loadChildren: () => import('./core/core.module').then(m => m.CoreModule)},
-  {path: 'login', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},
+  {path: '', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},
   {path: '-', component: NavigationComponent, children:[
       {path : 'dashboard' , component: DashboardComponent},
       {path: '', loadChildren: () => import('./ticket/ticket.module').then(m => m.TicketModule)},
