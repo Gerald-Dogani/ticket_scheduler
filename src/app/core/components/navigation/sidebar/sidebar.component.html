@@ -1,4 +1,4 @@
-<mat-nav-list xmlns="http://www.w3.org/1999/html">
+
   <div class="profile-card" >
     <img alt="" src="assets/icons/login-user.svg">
     <div class="header" *ngIf="isOpen">
@@ -7,8 +7,25 @@
     <br/>
   </div>
   <mat-divider></mat-divider>
-  <a routerLinkActive="list-item-active" routerLink="./home/"><mat-list-item><mat-icon mat-list-icon>home </mat-icon><h4 mat-line *ngIf="isOpen"> &nbsp; Home </h4></mat-list-item></a>
-  <a routerLinkActive="list-item-active" routerLink="./list/"><mat-list-item><mat-icon mat-list-icon>assignment</mat-icon><h4 mat-line *ngIf="isOpen"> &nbsp; Applications</h4></mat-list-item></a>
-  <a routerLinkActive="list-item-active" routerLink="./jobs/"><mat-list-item><mat-icon mat-list-icon>work_outline</mat-icon><h4 mat-line *ngIf="isOpen"> &nbsp; Job Vacancy</h4></mat-list-item></a>
-</mat-nav-list>
+  <mat-nav-list *ngFor="let item of menu">
+
+    <a class="no-child-list" mat-list-item [routerLink]="[item.path]" *ngIf="item.children.length == 0"
+       routerLinkActive="list-item-active" [routerLinkActiveOptions]="{exact: true}" (click)="drawer?.toggle(false)">
+        <img src="{{item.icon}}" alt="">
+        <span *ngIf="isOpen">{{item.name}}</span>
+    </a>
+<!--    <mat-expansion-panel [class.mat-elevation-z0]="true" *ngIf="item.children.length > 0">-->
+<!--      <mat-expansion-panel-header>-->
+<!--          <img src="{{item.icon}}" alt="">-->
+<!--          <span *ngIf="isOpen">{{item.name}}</span>-->
+<!--      </mat-expansion-panel-header>-->
+<!--      <mat-nav-list>-->
+<!--        <a mat-list-item *ngFor="let child of item.children" [routerLink]="child.path" routerLinkActive="list-item-active"-->
+<!--           [routerLinkActiveOptions]="{exact:true}">-->
+<!--            <img src="{{child.icon}}" alt="">-->
+<!--            <span *ngIf="isOpen">{{child.name}}</span>-->
+<!--        </a>-->
+<!--      </mat-nav-list>-->
+<!--    </mat-expansion-panel>-->
+  </mat-nav-list>
 

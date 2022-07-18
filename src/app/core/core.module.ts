@@ -1,4 +1,4 @@
-import {NgModule, Optional, SkipSelf} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule, Optional, SkipSelf} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -11,7 +11,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
-import {MatMenuModule} from "@angular/material/menu";
 import {MatSortModule} from "@angular/material/sort";
 import {MatTableModule} from "@angular/material/table";
 import {MatCardModule} from "@angular/material/card";
@@ -29,6 +28,7 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import * as fromComponents from '@core/components';
 import {RouterModule} from "@angular/router";
+import {MatMenuModule} from "@angular/material/menu";
 
 
 const MaterialModules = [
@@ -69,7 +69,8 @@ const MaterialModules = [
     CommonModule,
     RouterModule,
     ...MaterialModules
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

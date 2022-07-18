@@ -1,12 +1,11 @@
 <app-header [drawer]="drawer"></app-header>
-<mat-drawer-container>
+<mat-drawer-container class="example-container">
 
-  <mat-drawer #drawer mode="side" opened>
-    <app-sidebar [isOpen]="drawer.opened"></app-sidebar>
+  <mat-drawer #drawer [mode]="mode" [opened]="opened? 'opened':'closed'" [style]="opened? 'visible' : 'hidden'">
+    <app-sidebar [menu]="menu" [drawer]="drawer" [isOpen]="drawer.opened"></app-sidebar>
   </mat-drawer>
 
   <mat-drawer-content>
-       hi ernald
     <router-outlet></router-outlet>
   </mat-drawer-content>
 

@@ -11,7 +11,7 @@ import {NgxSpinnerService} from "ngx-spinner";
 })
 export class HeaderComponent implements OnInit {
   lufthansa_image = LUFTHANSA_IMAGE;
-  @Input() drawer!: MatDrawer;
+  @Input() drawer: any;
 
   constructor(private navigate: NavigationComponent, private loader: NgxSpinnerService) { }
 

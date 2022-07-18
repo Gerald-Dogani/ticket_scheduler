@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {NavigationComponent} from "@core/components";
+import {DashboardComponent, NavigationComponent} from "@core/components";
 
 const routes: Routes = [
   // {path : '' ,  loadChildren: () => import('./core/core.module').then(m => m.CoreModule)},
   {path: 'login', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},
   {path: '-', component: NavigationComponent, children:[
-      // {path : '' ,  loadChildren: () => import('./agent/agent.module').then(m => m.AgentModule)},
+      {path : 'dashboard' , component: DashboardComponent},
+      {path: '', loadChildren: () => import('./ticket/ticket.module').then(m => m.TicketModule)},
     ],
   },
   { path: '**', redirectTo: 'login', pathMatch: 'full' },

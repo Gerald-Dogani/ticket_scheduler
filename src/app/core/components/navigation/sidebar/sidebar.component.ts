@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {MenuItem} from "@core/components/navigation/menu";
 import {MatDrawer} from "@angular/material/sidenav";
 
 @Component({
@@ -9,8 +10,10 @@ import {MatDrawer} from "@angular/material/sidenav";
 export class SidebarComponent implements OnInit {
   @Input() drawer!: MatDrawer;
   @Input() isOpen: boolean = true;
+  @Input() menu: MenuItem[] = [];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
