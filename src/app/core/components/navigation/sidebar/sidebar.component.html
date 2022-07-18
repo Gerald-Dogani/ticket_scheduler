@@ -10,7 +10,7 @@
   <mat-nav-list *ngFor="let item of menu">
 
     <a class="no-child-list" mat-list-item [routerLink]="[item.path]" *ngIf="item.children.length == 0"
-       routerLinkActive="list-item-active" [routerLinkActiveOptions]="{exact: true}" (click)="drawer?.toggle(false)">
+       routerLinkActive="list-item-active" [routerLinkActiveOptions]="{exact: true}" (click)="canToggle()">
         <img src="{{item.icon}}" alt="">
         <span *ngIf="isOpen">{{item.name}}</span>
     </a>

@@ -10,6 +10,7 @@ import {MatDrawer} from "@angular/material/sidenav";
 export class SidebarComponent implements OnInit {
   @Input() drawer!: MatDrawer;
   @Input() isOpen: boolean = true;
+  @Input() isWeb: boolean = true;
   @Input() menu: MenuItem[] = [];
 
   constructor() {
@@ -18,4 +19,9 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  canToggle() {
+    if (!this.isWeb) {
+      this.drawer?.toggle(false)
+    }
+  }
 }

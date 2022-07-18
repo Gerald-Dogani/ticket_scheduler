@@ -2,7 +2,7 @@
 <mat-drawer-container class="example-container">
 
   <mat-drawer #drawer [mode]="mode" [opened]="opened? 'opened':'closed'" [style]="opened? 'visible' : 'hidden'">
-    <app-sidebar [menu]="menu" [drawer]="drawer" [isOpen]="drawer.opened"></app-sidebar>
+    <app-sidebar [menu]="menu" [isWeb]="web" [drawer]="drawer" [isOpen]="drawer.opened"></app-sidebar>
   </mat-drawer>
 
   <mat-drawer-content>

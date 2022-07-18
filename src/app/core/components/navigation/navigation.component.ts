@@ -17,6 +17,7 @@ export class NavigationComponent implements OnInit {
   screenWidth: number = 0;
   mode: MatDrawerMode = 'side';
   opened: boolean = true;
+  web: boolean = true;
 
   constructor(private route: Router, private authService: AuthService, private loader: NgxSpinnerService) {
   this.getScreenSize()
@@ -31,6 +32,7 @@ export class NavigationComponent implements OnInit {
     if(this.screenWidth<1000){
       this.mode = 'push';
       this.drawer?.toggle();
+      this.web = false;
     }
   }
   logout() {
