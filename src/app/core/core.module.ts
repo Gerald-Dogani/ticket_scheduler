@@ -29,6 +29,11 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import * as fromComponents from '@core/components';
 import {RouterModule} from "@angular/router";
 import {MatMenuModule} from "@angular/material/menu";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {ErrorInterceptor} from "@core/interceptors/error.interceptor";
+import {LoaderInterceptorService} from "@core/interceptors/loader.interceptor";
+import {AuthInterceptor} from "@core/interceptors/auth.interceptors";
+import {NgxPermissionsModule} from "ngx-permissions";
 
 
 const MaterialModules = [
@@ -68,7 +73,13 @@ const MaterialModules = [
   imports: [
     CommonModule,
     RouterModule,
+    NgxPermissionsModule.forRoot(),
     ...MaterialModules
+  ],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true},
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

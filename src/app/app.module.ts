@@ -45,6 +45,7 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {NgxSpinnerModule} from "ngx-spinner";
 import {AuthService} from "@core/services/auth-service/auth.service";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 
 
 const MaterialModules = [
@@ -83,6 +84,7 @@ const MaterialModules = [
     AppComponent,
   ],
   imports: [
+    HttpClientModule,
     MaterialModules,
     BrowserModule,
     FormsModule,
@@ -91,7 +93,7 @@ const MaterialModules = [
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, 'ticket_scheduler'),
-    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
+    NgxSpinnerModule.forRoot({type: 'ball-scale-multiple'}),
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
@@ -108,7 +110,11 @@ const MaterialModules = [
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent],
-  providers: [AuthService]
+  providers: [
+    AuthService,
+    HttpClient,
+    HttpClientModule,
+  ]
 })
 export class AppModule {
 }
