@@ -49,6 +49,7 @@ export class AuthService {
         if (token) {
 
           const authToken = AuthToken.deserialize(token.user);
+          console.log(authToken)
           await token.user.getIdTokenResult().then(res => {
             authToken.idToken = res.token
           })
@@ -56,6 +57,7 @@ export class AuthService {
             console.log(res)
           })
           this.cookieService.setAuthToken(authToken);
+
           // this.loadPermissions(token['permissions']);
           // this.loadRoles(token['groups']);
           this.currentTokenSubject.next(authToken);
@@ -73,23 +75,7 @@ export class AuthService {
       });
   }
 
-  SetUserData(user: any) {
 
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${user.uid}`
-    );
-    console.log(userRef)
-    const userData: User = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      emailVerified: user.emailVerified,
-    };
-    return userRef.set(userData, {
-      merge: true,
-    });
-  }
 
   signUp(email: string, password: string) {
     return from(createUserWithEmailAndPassword(this.auth, email, password).then((result) => {
@@ -97,7 +83,6 @@ export class AuthService {
       up and returns promise */
       this.SendVerificationMail();
       this.SetUserData(result.user)
-      console.log(result)
     })
       .catch((error) => {
         window.alert(error.message);
@@ -148,4 +133,21 @@ export class AuthService {
     });
   }
 
+  SetUserData(user: any) {
+
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${user.uid}`
+    );
+    console.log(userRef)
+    const userData: User = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified,
+    };
+    return userRef.set(userData, {
+      merge: true,
+    });
+  }
 }

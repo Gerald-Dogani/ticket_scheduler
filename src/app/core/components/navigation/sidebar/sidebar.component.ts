@@ -3,6 +3,8 @@ import {MenuItem} from "@core/components/navigation/menu";
 import {MatDrawer} from "@angular/material/sidenav";
 import {AuthService} from "@core/services/auth-service/auth.service";
 import {User} from "@shared/entities/UserInterface";
+import {UserI} from "@core/models/models";
+import {CookieService} from "@core/services/auth-service/cookie.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -14,14 +16,14 @@ export class SidebarComponent implements OnInit {
   @Input() isOpen: boolean = true;
   @Input() isWeb: boolean = true;
   @Input() menu: MenuItem[] = [];
-  user: User;
+  user: UserI = new UserI();
 
-  constructor(private authService: AuthService) {
-  this.user = this.authService.userData
+  constructor(private authService: AuthService, private cookieService: CookieService) {
+
   }
 
   ngOnInit(): void {
-    console.log(this.user)
+    this.user.email = this.cookieService.get('email');
   }
 
   canToggle() {
