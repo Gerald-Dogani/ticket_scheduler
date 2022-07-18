@@ -8,8 +8,9 @@ import {Router} from "@angular/router";
 import {NgxPermissionsService, NgxRolesService} from "ngx-permissions";
 import {AUTH_ENDPOINT} from "@shared/endpoints";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
-import {AngularFirestore} from "@angular/fire/compat/firestore";
+import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/compat/firestore";
 import {getToken} from "@angular/fire/app-check";
+import {User} from "@shared/entities/UserInterface";
 
 @Injectable({
   providedIn: 'root'
@@ -59,7 +60,43 @@ export class AuthService {
 
   }
 
+  SendVerificationMail() {
+    return this.afAuth.currentUser
+      .then((u: any) => u.sendEmailVerification())
+      .then(() => {
+        this.router.navigate(['verify-email-address']);
+      });
+  }
 
+  SetUserData(user: any) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${user.uid}`
+    );
+    const userData: User = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified,
+    };
+    return userRef.set(userData, {
+      merge: true,
+    });
+  }
+
+  SignUp(email: string, password: string) {
+    return this.afAuth
+      .createUserWithEmailAndPassword(email, password)
+      .then((result) => {
+        /* Call the SendVerificaitonMail() function when new user sign
+        up and returns promise */
+        this.SendVerificationMail();
+        this.SetUserData(result.user);
+      })
+      .catch((error) => {
+        window.alert(error.message);
+      });
+  }
 
   public logout() {
     this.cookieService.deleteAll();
