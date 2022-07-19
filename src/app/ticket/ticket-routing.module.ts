@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {ListComponent} from "./list/list.component";
 import {FormComponent} from "./form/form.component";
 import {DetailsComponent} from "./details/details.component";
+import {DatePipe} from "@shared/pipes/date.pipe";
 
 const routes: Routes = [
   {path: 'list', component: ListComponent},
@@ -12,7 +13,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  declarations: [DatePipe],
+  exports: [RouterModule, DatePipe]
 })
 export class TicketRoutingModule {
 }

@@ -114,6 +114,7 @@ const MaterialModules = [
     AuthService,
     HttpClient,
     HttpClientModule,
+    AngularFirestoreModule
   ]
 })
 export class AppModule {

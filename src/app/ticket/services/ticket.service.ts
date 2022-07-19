@@ -15,16 +15,17 @@ export class TicketService {
 
   // Create Ticket
   addTicket(ticket: Ticket) {
-    return this.db.collection('tickets').add(ticket)
+    // delete ticket.id;
+    const d = Object.assign({}, ticket)
+    return this.db.collection('tickets').add(d)
   }
 
-  getTicket(ticket_id: string) {
-    return this.db.collection('tickets/' + ticket_id).get();
+  getTicket(id: string) {
+    return this.db.collection('tickets/' + id).get();
   }
 
   // ToDo Update
-  updateTicket(ticket: Ticket) {
-    const id = String(ticket.id)
+  updateTicket(ticket: Ticket, id: string) {
     this.db.collection('tickets/').doc(id).update(ticket);
   }
 

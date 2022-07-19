@@ -3,21 +3,22 @@
     My ticket list
   </div>
   <div *ngFor="let data of tickets;  let i = index">
-    <ng-container *ngFor="let data of data | keyvalue">
-      <div *ngIf='!i' id="resp-table-header">
-        <div  class="table-header-cell">
-          {{data?.key}}
-        </div>
-      </div>
-      <div id="resp-table-body">
-        <div  *ngif="i" class="resp-table-row">
-          <div class="table-body-cell">
-            {{data?.value}}
-          </div>
+<!--    <ng-container *ngFor="let data of data | keyvalue">-->
+<!--      <div *ngIf='!i' id="resp-table-header">-->
+<!--        <div  class="table-header-cell">-->
+          {{data.id}}
+          {{data.inbound}}
+          {{data.from_date | dateFormat}}
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div id="resp-table-body">-->
+<!--        <div  *ngif="i" class="resp-table-row">-->
+<!--          <div class="table-body-cell">-->
+<!--          </div>-->
 
-        </div>
-      </div>
-    </ng-container>
+<!--        </div>-->
+<!--      </div>-->
+<!--    </ng-container>-->
 
   </div>
 
