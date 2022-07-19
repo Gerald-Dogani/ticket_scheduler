@@ -11,7 +11,7 @@ import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  private readonly REFRESH_URL = `${environment.firebaseConfig.authDomain}/auth/knock-knock/refresh/`;
+  private readonly REFRESH_URL = `${environment.firebase.authDomain}/auth/knock-knock/refresh/`;
   private readonly REFRESH_TOKEN = 'refreshToken';
   private readonly ACCESS_TOKEN = 'idToken';
 

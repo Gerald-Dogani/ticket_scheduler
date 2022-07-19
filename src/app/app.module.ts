@@ -92,7 +92,7 @@ const MaterialModules = [
     CoreModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig, 'ticket_scheduler'),
+    AngularFireModule.initializeApp(environment.firebase),
     NgxSpinnerModule.forRoot({type: 'ball-scale-multiple'}),
     AngularFireAuthModule,
     AngularFirestoreModule,
