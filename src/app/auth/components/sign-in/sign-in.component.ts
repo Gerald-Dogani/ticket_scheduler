@@ -9,6 +9,7 @@ import {SnackBarService} from "@shared/services/snack-bar-service/snack-bar.serv
 import {FirebaseError} from "@shared/entities/ErrorInterface";
 import {LUFTHANSA_IMAGE} from "@shared/cons";
 import {NgxSpinnerService} from "ngx-spinner";
+import {timer} from "rxjs";
 
 @Component({
   selector: 'app-sign-in',
@@ -27,10 +28,24 @@ export class SignInComponent implements OnInit{
   }
 
   ngOnInit() {
+    this.logout();
     this.createLogin();
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '-';
 
   }
+
+  logout() {
+    this.authService.logout().subscribe({
+        next: (_) => {
+          this.router.navigate([`auth/login`]);
+        },
+        complete: () => {
+          this.loader.hide();
+        }
+      },
+    );
+  }
+
 
   createLogin(): void {
     this.loginForm = this.form.initLogIn();

@@ -5,7 +5,7 @@ import {AuthGuard} from "@core/guards/auth.guard";
 
 const routes: Routes = [
   // {path : '' ,  loadChildren: () => import('./core/core.module').then(m => m.CoreModule)},
-  {path: '', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},
+  {path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)},
   {path: '-', component: NavigationComponent, children:[
       {path : 'dashboard' , component: DashboardComponent},
       {path: '', loadChildren: () => import('./ticket/ticket.module').then(m => m.TicketModule)},
@@ -13,7 +13,7 @@ const routes: Routes = [
     canLoad: [AuthGuard],
     canActivate: [AuthGuard],
   },
-  { path: '**', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'auth/login', pathMatch: 'full' },
 ]
 
 

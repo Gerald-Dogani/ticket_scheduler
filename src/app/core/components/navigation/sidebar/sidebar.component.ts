@@ -24,6 +24,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.user.email = this.cookieService.get('email');
+    console.log(this.user)
   }
 
   canToggle() {

@@ -5,23 +5,24 @@ import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword
 } from "@angular/fire/auth";
-import {BehaviorSubject, from, Observable} from "rxjs";
-import {AuthToken} from "@core/models/models";
+import {BehaviorSubject, first, from, Observable, switchMap, take} from "rxjs";
+import {AuthToken, UserI} from "@core/models/models";
 import {HttpBackend, HttpClient} from "@angular/common/http";
 import {CookieService} from "@core/services/auth-service/cookie.service";
 import {Router} from "@angular/router";
 import {NgxPermissionsService, NgxRolesService} from "ngx-permissions";
 import {AUTH_ENDPOINT} from "@shared/endpoints";
-import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/compat/firestore";
-import {User} from "@shared/entities/UserInterface";
 import {SnackBarService} from "@shared/services/snack-bar-service/snack-bar.service";
+import {AngularFireAuth} from "@angular/fire/compat/auth";
+import {User} from "@shared/entities/UserInterface";
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
-  userData: any;
+  user$: Observable<User>;
   credentialData: any;
   private currentTokenSubject: BehaviorSubject<AuthToken>;
   private httpWithoutInterceptor;
@@ -30,7 +31,7 @@ export class AuthService {
   nextWeek: Date = new Date();
 
   constructor(private auth: Auth, private http: HttpClient, private httpBackEnd: HttpBackend, private cookieService: CookieService,
-              private router: Router, public ngZone: NgZone, public afAuth: AngularFireAuth, public afs: AngularFirestore,
+              private router: Router, public ngZone: NgZone, private afAuth: AngularFireAuth, public afs: AngularFirestore,
               private permissionsService: NgxPermissionsService, private rolesService: NgxRolesService, private snackBar: SnackBarService,
               @Optional() @SkipSelf() singletonService?: AuthService) {
 
@@ -41,7 +42,16 @@ export class AuthService {
     this.nextWeek.setDate(this.today.getDate() + 7);
 
     this.currentTokenSubject = new BehaviorSubject<AuthToken>(new AuthToken());
-    this.httpWithoutInterceptor = new HttpClient(httpBackEnd);
+    this.httpWithoutInterceptor = new HttpClient(httpBackEnd)
+    // @ts-ignore
+    this.user$ = this.afAuth.authState.pipe(take(1),
+      switchMap(user => {
+        if (user) {
+          return this.afs.doc<User>(`users/${user.uid}`).valueChanges()
+        } else {
+          return new Observable<User>
+        }
+      }))
   }
 
   login(username: string, password: string): Observable<any> {
@@ -52,9 +62,6 @@ export class AuthService {
           console.log(authToken)
           await token.user.getIdTokenResult().then(res => {
             authToken.idToken = res.token
-          })
-          this.afAuth.idToken.subscribe(res => {
-            console.log(res)
           })
           this.cookieService.setAuthToken(authToken);
 
@@ -71,18 +78,17 @@ export class AuthService {
     return this.afAuth.currentUser
       .then((u: any) => u.sendEmailVerification())
       .then(() => {
-        this.router.navigate(['verify-email-address']);
+        this.router.navigate(['auth/verify-email-address']);
       });
   }
 
 
-
   signUp(email: string, password: string) {
-    return from(createUserWithEmailAndPassword(this.auth, email, password).then((result) => {
+    return from(this.afAuth.createUserWithEmailAndPassword(email, password).then((result) => {
       /* Call the SendVerificaitonMail() function when new user sign
       up and returns promise */
-      this.SendVerificationMail();
-      this.SetUserData(result.user)
+      this.SendVerificationMail().then(()=>this.SetUserData(result.user));
+
     })
       .catch((error) => {
         window.alert(error.message);
@@ -140,11 +146,12 @@ export class AuthService {
     );
     console.log(userRef)
     const userData: User = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      emailVerified: user.emailVerified,
+      uid: '0',
+      email: 'gdogani@it-works.io',
+      displayName: 'ggggg',
+      photoURL: 'user.photoURL',
+      emailVerified: false,
+      role: {admin: false}
     };
     return userRef.set(userData, {
       merge: true,

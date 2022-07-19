@@ -38,7 +38,7 @@ export class NavigationComponent implements OnInit {
   logout() {
     this.authService.logout().subscribe({
         next: (_) => {
-          this.route.navigate([`login`]);
+          this.route.navigate([`auth/login`]);
         },
         complete: () => {
           this.loader.hide();

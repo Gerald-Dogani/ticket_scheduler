@@ -42,7 +42,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       if (error.status === 401) {
         if (error.error.detail && error.error.detail === 'Authentication credentials were not provided.') {
           this.authService.logout();
-          this.router.navigate(['login/']).then();
+          this.router.navigate(['auth/login/']).then();
         } else {
           const authToken: AuthToken | null = this.cookieService.getAuthToken();
           // @ts-ignore
@@ -62,7 +62,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               return next.handle(request);
             } else {
               this.authService.logout();
-              this.router.navigate(['login']).then();
+              this.router.navigate(['auth/login']).then();
             }
           }));
         }

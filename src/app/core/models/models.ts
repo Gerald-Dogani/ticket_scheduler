@@ -1,3 +1,5 @@
+import {Roles} from "@shared/entities/UserInterface";
+
 export class SerializeUtil {
   public serialize(): any {
   }
@@ -25,10 +27,16 @@ export class AuthToken {
 
 }
 
+export class Role {
+  constructor(public subscriber?: boolean, public editor?: boolean, public admin?: boolean) {
+  }
+}
 
 export class UserI {
-  constructor(public displayName: string = '', public email: string = '', public emailVerified: boolean = false,
-              public photoURL: string = '', public uid: string = '') {
+
+  constructor(public displayName: string = '',
+              public email: string = '', public emailVerified: boolean = false,
+              public photoURL: string = '', public uid: string = '', public role: Role = new Role()) {
   }
 }
 
