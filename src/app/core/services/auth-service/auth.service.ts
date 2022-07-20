@@ -110,19 +110,19 @@ export class AuthService {
   async isLoggedInPermissions() {
     const currentToken = this.cookieService.getAuthToken();
     if (currentToken && currentToken.idToken !== '') {
-      this.http.get(AUTH_ENDPOINT.USER_PERMISSIONS_URL).subscribe({
-        next: (response: any) => {
-          this.cookieService.setAuthToken(currentToken);
-          // this.loadPermissions(response['kind']['permissions']);
-          // this.loadRoles(response['data']['groups']);
-        },
-        error: (error) => {
-          throw error;
-        }
-      })
+      // this.http.get(AUTH_ENDPOINT.USER_PERMISSIONS_URL).subscribe({
+      //   next: (response: any) => {
+      //     this.cookieService.setAuthToken(currentToken);
+      //     // this.loadPermissions(response['kind']['permissions']);
+      //     // this.loadRoles(response['data']['groups']);
+      //   },
+      //   error: (error) => {
+      //     throw error;
+      //   }
+      // })
       return true;
     } else {
-      await this.router.navigate(['/login']);
+      // await this.router.navigate(['/login']);
       return false;
     }
   }

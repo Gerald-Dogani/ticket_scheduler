@@ -34,6 +34,8 @@ import {ErrorInterceptor} from "@core/interceptors/error.interceptor";
 import {LoaderInterceptorService} from "@core/interceptors/loader.interceptor";
 import {AuthInterceptor} from "@core/interceptors/auth.interceptors";
 import {NgxPermissionsModule} from "ngx-permissions";
+import {SpinLoaderComponent} from "@core/components/loader/components/spin-loader/spin-loader.component";
+import {LoaderComponent} from "@core/components/loader/components/loader.component";
 
 
 const MaterialModules = [
@@ -69,7 +71,7 @@ const MaterialModules = [
 
 @NgModule({
   declarations: [...fromComponents.components],
-  exports: [...fromComponents.components],
+  exports: [LoaderComponent,...fromComponents.components],
   imports: [
     CommonModule,
     RouterModule,
@@ -80,6 +82,8 @@ const MaterialModules = [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true},
+    SpinLoaderComponent, LoaderComponent
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

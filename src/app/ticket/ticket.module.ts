@@ -5,6 +5,7 @@ import { TicketRoutingModule } from './ticket-routing.module';
 import { ListComponent } from './list/list.component';
 import { FormComponent } from './form/form.component';
 import { DetailsComponent } from './details/details.component';
+import {SharedModule} from "@shared/shared.module";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { DetailsComponent } from './details/details.component';
   ],
   imports: [
     CommonModule,
-    TicketRoutingModule
+    TicketRoutingModule,
+    SharedModule
   ],
 
 })

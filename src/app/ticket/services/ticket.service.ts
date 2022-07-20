@@ -1,18 +1,22 @@
 import {Injectable} from '@angular/core';
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {Ticket} from "@shared/models/ticket.model";
+import {HotToastService} from "@ngneat/hot-toast";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TicketService {
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFirestore, private toast: HotToastService) {
   }
 
   getTicketsList() {
     return this.db.collection('tickets').snapshotChanges();
   }
 
+  getFilteredTickets() {
+    return this.db.collection('tickets', ref => ref.where('ticket_type', '==', 'Economic')).valueChanges();
+  }
   // Create Ticket
   addTicket(ticket: Ticket) {
     // delete ticket.id;

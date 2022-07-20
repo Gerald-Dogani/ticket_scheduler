@@ -1,2 +1,12 @@
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script>
+  // If reCAPTCHA is still loading, grecaptcha will be undefined.
+  grecaptcha.ready(function(){
+    grecaptcha.render("container", {
+      sitekey: "6LfI7vogAAAAAPoOqxe73PQMYlOELMbQe__WpEzL"
+    });
+  });
+</script>
 <router-outlet></router-outlet>
 <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+<re-captcha (resolved)="resolved($event)" [siteKey]="siteKey" ></re-captcha>
