@@ -1,25 +1,64 @@
-<div id="resp-table">
-  <div id="resp-table-caption">
-    My ticket list
-  </div>
-  <div *ngFor="let data of tickets;  let i = index">
-<!--    <ng-container *ngFor="let data of data | keyvalue">-->
-<!--      <div *ngIf='!i' id="resp-table-header">-->
-<!--        <div  class="table-header-cell">-->
-          {{data.id}}
-          {{data.inbound}}
-          {{data.from_date | dateFormat}}
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div id="resp-table-body">-->
-<!--        <div  *ngif="i" class="resp-table-row">-->
-<!--          <div class="table-body-cell">-->
-<!--          </div>-->
+<mat-card class="table-responsive table"  [formGroup]="ticketForm">
+  <div class="header-title">Ticket List</div>
+  <div formArrayName="ticket">
 
-<!--        </div>-->
-<!--      </div>-->
-<!--    </ng-container>-->
+    <div class="body-table"  *ngFor="let data of this.ticketsAsFormArray.value;  let i = index"
+         [formGroupName]="i">
+      <!--      <div [formArrayName]="i">-->
+      <div class="table-header margin-left" *ngIf="i == 0">
+        <span class="column-details-left">Id</span>
+        <span class="column-details-left">Inbound</span>
+        <span class="column-details-left">Outbound</span>
+        <span class="column-details-left">Ticket Type</span>
+        <span class="column-details-left">Ticket Type id</span>
+        <span class="column-details-left">Price</span>
+        <span class="column-details-left">From date</span>
+        <span class="column-details-left">To date</span>
+        <span class="column-details-left">Seat number</span>
+      </div>
+      <div class="table-header margin-left" *ngIf="i != 0 && width <=700">
+        <span class="column-details-left">Id</span>
+        <span class="column-details-left">Inbound</span>
+        <span class="column-details-left">Outbound</span>
+        <span class="column-details-left">Ticket Type</span>
+        <span class="column-details-left">Ticket Type id</span>
+        <span class="column-details-left">Price</span>
+        <span class="column-details-left">From date</span>
+        <span class="column-details-left">To date</span>
+        <span class="column-details-left">Seat number</span>
+      </div>
+      <div class="table-body margin-left">
+        <span class="column-details-right">{{data.id}}</span>
+        <span class="column-details-right">{{data.inbound}}</span>
+        <span class="column-details-right">{{data.outbound}}</span>
+        <span class="column-details-right">{{data.ticket_type}}</span>
+        <span class="column-details-right">{{data.ticket_type_id}}</span>
+        <span class="column-details-right">{{data.price}}</span>
+        <span class="column-details-right">{{data.from_date | dateFormat :'dd/MM/YYYY'}}</span>
+        <span class="column-details-right">{{data.to_date | dateFormat :'dd/MM/YYYY'}}</span>
+        <span class="column-details-right">{{data.seat_number}}</span>
+      </div>
+    <!--      </div>-->
+    <!--      <ng-container>-->
+    <!--        <div *ngIf='!i' id="resp-table-header">-->
+    <!--          <div  class="table-header-cell">-->
+    <!--            &lt;!&ndash;          {{data}}{{da}}&ndash;&gt;-->
+    <!--            &lt;!&ndash;          {{data.inbound}}&ndash;&gt;-->
+    <!--            &lt;!&ndash;          {{data.from_date | dateFormat}}&ndash;&gt;-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--        <div id="resp-table-body">-->
+    <!--          <div  *ngif="i" class="resp-table-row">-->
+    <!--            <div class="table-body-cell">-->
+    <!--            </div>-->
+
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </ng-container>-->
 
   </div>
 
 </div>
+
+
+</mat-card>

@@ -6,9 +6,9 @@ import {DetailsComponent} from "./details/details.component";
 import {DatePipe} from "@shared/pipes/date.pipe";
 
 const routes: Routes = [
-  {path: 'list', component: ListComponent},
-  {path: 'form', component: FormComponent},
-  {path: 'details', component: DetailsComponent},
+  {path: 'list', component: ListComponent, pathMatch: 'full'},
+  {path: 'form', component: FormComponent, pathMatch: 'full'},
+  {path: 'details', component: DetailsComponent, pathMatch: 'full'},
 ];
 
 @NgModule({
