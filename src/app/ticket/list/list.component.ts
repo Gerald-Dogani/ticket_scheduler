@@ -139,9 +139,6 @@ export class ListComponent implements OnInit {
         if (key == 'inbound') {
           this.filterByInbound(this.ticketSearchForm.controls[key].value);
         }
-
-      } else {
-        this.getAllTickets();
       }
     })
     this.items$.subscribe(data => {
