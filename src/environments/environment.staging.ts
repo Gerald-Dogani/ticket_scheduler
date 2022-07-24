@@ -9,10 +9,11 @@ export const environment = {
     authDomain: 'ticket-scheduler-1c428.firebaseapp.com',
     messagingSenderId: '546587343163',
     measurementId: 'G-SDNPJYMBP7',
+
   },
   production: true,
+  name: 'staging',
   API_HOST: 'https://ticket-scheduler-1c428.web.app/#',
-  name: 'production',
   // firebaseConfig: {
   //   apiKey: "AIzaSyCmghUp-PthiHXmWzeyggiVpTf_hSJLLyA",
   //   authDomain: "ticket-scheduler-1c428.firebaseapp.com",

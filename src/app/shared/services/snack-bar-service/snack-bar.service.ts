@@ -8,7 +8,7 @@ import {FirebaseError} from "@shared/entities/ErrorInterface";
   providedIn: 'root'
 })
 export class SnackBarService {
-  returnUrl:string = '-';
+  returnUrl:string = '-/dashboard';
 
   constructor(private loader: NgxSpinnerService, private snackBar: MatSnackBar, private router: Router) { }
 

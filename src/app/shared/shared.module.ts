@@ -29,6 +29,11 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatTabsModule} from "@angular/material/tabs";
 import {FlexLayoutModule} from "@angular/flex-layout";
+import {
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
+  NgxMatTimepickerModule
+} from "@angular-material-components/datetime-picker";
 
 const MaterialModules = [
   MatToolbarModule,
@@ -60,6 +65,9 @@ const MaterialModules = [
   MatRadioModule,
   MatGridListModule,
   MatCheckboxModule,
+  NgxMatTimepickerModule,
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
 ]
 
 @NgModule({

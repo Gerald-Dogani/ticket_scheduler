@@ -1,0 +1,34 @@
+/* For use in src/lib/core/theming/_theming.scss */
+$md-ticket: (
+  50 : #e4e6ea,
+  100 : #bdc0cc,
+  200 : #9196aa,
+  300 : #646b87,
+  400 : #434c6e,
+  500 : #222c54,
+  600 : #1e274d,
+  700 : #192143,
+  800 : #141b3a,
+  900 : #0c1029,
+  A100 : #677bff,
+  A200 : rgba(44, 64, 141, 0.96),
+  A400 : #0122ff,
+  A700 : #001ee6,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
+);
+

@@ -17,7 +17,8 @@ export const environment = {
     measurementId: 'G-SDNPJYMBP7',
   },
   production: false,
-
+  name: 'development',
+  API_HOST: 'http://localhost:4200/#',
 };
 
 // Initialize Firebase

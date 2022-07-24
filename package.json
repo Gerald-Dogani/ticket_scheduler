@@ -1,15 +1,18 @@
 {
   "name": "ticket-scheduler",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build-staging": "ng build --configuration=staging",
+    "build-master": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
   "private": true,
   "dependencies": {
+    "@angular-material-components/datetime-picker": "^8.0.0",
     "@angular/animations": "^14.0.0",
     "@angular/cdk": "^14.0.5",
     "@angular/common": "^14.0.0",

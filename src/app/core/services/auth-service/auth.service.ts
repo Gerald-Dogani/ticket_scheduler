@@ -1,21 +1,16 @@
 import {Injectable, NgZone, Optional, SkipSelf} from '@angular/core';
-import {
-  Auth,
-  createUserWithEmailAndPassword,
-  sendPasswordResetEmail,
-  signInWithEmailAndPassword
-} from "@angular/fire/auth";
-import {BehaviorSubject, first, from, Observable, switchMap, take} from "rxjs";
-import {AuthToken, UserI} from "@core/models/models";
+import {Auth, sendPasswordResetEmail, signInWithEmailAndPassword} from "@angular/fire/auth";
+import {BehaviorSubject, from, Observable, switchMap, take} from "rxjs";
+import {AuthToken} from "@core/models/models";
 import {HttpBackend, HttpClient} from "@angular/common/http";
 import {CookieService} from "@core/services/auth-service/cookie.service";
 import {Router} from "@angular/router";
 import {NgxPermissionsService, NgxRolesService} from "ngx-permissions";
-import {AUTH_ENDPOINT} from "@shared/endpoints";
 import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/compat/firestore";
 import {SnackBarService} from "@shared/services/snack-bar-service/snack-bar.service";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {User} from "@shared/entities/UserInterface";
+import {waitForAsync} from "@angular/core/testing";
 
 @Injectable({
   providedIn: 'root'
@@ -57,7 +52,7 @@ export class AuthService {
   login(username: string, password: string): Observable<any> {
     return from(signInWithEmailAndPassword(this.auth, username, password).then((async token => {
         if (token) {
-
+          JSON.stringify(token)
           const authToken = AuthToken.deserialize(token.user);
           console.log(authToken)
           await token.user.getIdTokenResult().then(res => {
@@ -87,7 +82,9 @@ export class AuthService {
     return from(this.afAuth.createUserWithEmailAndPassword(email, password).then((result) => {
       /* Call the SendVerificaitonMail() function when new user sign
       up and returns promise */
-      this.SendVerificationMail().then(()=>this.SetUserData(result.user));
+      this.SendVerificationMail().then( (_)=>{
+         this.SetUserData(result.user)
+      });
 
     })
       .catch((error) => {
@@ -139,20 +136,24 @@ export class AuthService {
     });
   }
 
-  SetUserData(user: any) {
+  async UpdateProfile(user: User) {
+    return (await this.afAuth.currentUser)?.updateProfile(user);
+  }
 
+  SetUserData(user: any) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
     console.log(userRef)
-    const userData: User = {
-      uid: '0',
-      email: 'gdogani@it-works.io',
-      displayName: 'ggggg',
-      photoURL: 'user.photoURL',
+    const userData = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName? user.displayName: '',
+      photoURL: user.photoURL?  user.photoURL: '',
       emailVerified: false,
       role: {admin: false}
     };
+    this.UpdateProfile(userData);
     return userRef.set(userData, {
       merge: true,
     });

@@ -8,7 +8,7 @@ import {DatePipe} from "@shared/pipes/date.pipe";
 const routes: Routes = [
   {path: 'list', component: ListComponent, pathMatch: 'full'},
   {path: 'form', component: FormComponent, pathMatch: 'full'},
-  {path: 'details', component: DetailsComponent, pathMatch: 'full'},
+  {path: 'details/:id', component: DetailsComponent, pathMatch: 'full'},
 ];
 
 @NgModule({

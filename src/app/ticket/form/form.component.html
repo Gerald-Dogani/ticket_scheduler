@@ -1,1 +1,101 @@
-<p>form works!</p>
+<div class="form-card">
+  <div class="header-title">Book ticket</div>
+  <mat-card>
+
+    <form class="form" [formGroup]="createTicketForm">
+      <div class="row-inputs">
+        <mat-form-field fxFlex="40" appearance="outline">
+          <mat-label>Inbound</mat-label>
+          <input matInput type="text" formControlName="inbound">
+          <!--      <mat-error>{{error}}</mat-error>-->
+        </mat-form-field>
+        <mat-form-field fxFlex="40" appearance="outline">
+          <mat-label>Outbound</mat-label>
+          <input matInput type="text" formControlName="outbound">
+          <!--      <mat-error>{{error}}</mat-error>-->
+        </mat-form-field>
+      </div>
+      <div class="row-inputs">
+        <mat-form-field fxFlex="40" appearance="outline">
+          <mat-label>Ticket type</mat-label>
+          <mat-select type="text" formControlName="ticket_type">
+            <mat-option *ngFor="let type of types" [value]="type.id" (click)="patchPrice(type)">
+              {{type.ticket_type}}
+            </mat-option>
+          </mat-select>
+          <!--      <mat-error>{{error}}</mat-error>-->
+        </mat-form-field>
+        <mat-form-field fxFlex="40" appearance="outline">
+          <mat-label>Ticket type id</mat-label>
+          <input matInput type="text" formControlName="ticket_type_id">
+          <!--      <mat-error>{{error}}</mat-error>-->
+        </mat-form-field>
+      </div>
+      <div class="row-inputs">
+        <!--        <mat-form-field fxFlex="40" appearance="outline">-->
+        <!--          <mat-label>From date</mat-label>-->
+        <!--          <input matInput rInputMask="99/99/9999" [min]="today" [ngxMatDatetimePicker]="picker" placeholder="From date" formControlName="from_date">-->
+        <!--          <mat-datepicker-toggle  [for]="picker" matSuffix></mat-datepicker-toggle>-->
+        <!--          <ngx-mat-datetime-picker  [(ngModel)]="today" #picker [color]="color" [disableMinute]="false" [enableMeridian]="true"-->
+        <!--                                   [hideTime]="false"-->
+        <!--                                   [showSeconds]="false" [showSpinners]="true" [stepHour]="stepHour"-->
+        <!--                                   [stepMinute]="stepMinute" [stepSecond]="stepSecond" [touchUi]="false">-->
+        <!--          </ngx-mat-datetime-picker>-->
+        <!--        </mat-form-field>-->
+
+        <mat-form-field fxFlex="40" appearance="outline">
+          <mat-label>From date</mat-label>
+          <input (dateChange)="show($event)" matInput (focus)="to_selected_date1.open()" [max]="createTicketForm.controls['to_date'].value"
+                 [ngxMatDatetimePicker]="to_selected_date1" placeholder="From date"
+                 formControlName="from_date">
+          <mat-hint>dd/mm/yyyy hh:mm</mat-hint>
+          <mat-datepicker-toggle matSuffix  [for]="$any(to_selected_date1)"></mat-datepicker-toggle>
+          <ngx-mat-datetime-picker #to_selected_date1 [color]="color" [disableMinute]="false" [enableMeridian]="true"
+                                   [hideTime]="false"
+                                   [showSeconds]="false" [showSpinners]="true" [stepHour]="stepHour"
+                                   [stepMinute]="stepMinute" [stepSecond]="stepSecond" [touchUi]="false">
+          </ngx-mat-datetime-picker>
+        </mat-form-field>
+
+        <mat-form-field fxFlex="40" appearance="outline">
+          <mat-label>To date</mat-label>
+          <input (dateChange)="show($event)" matInput (focus)="to_selected_date2.open()" [min]="createTicketForm.controls['from_date'].value"
+                 [ngxMatDatetimePicker]="to_selected_date2" placeholder="To date"
+                 formControlName="to_date">
+          <mat-hint>dd/mm/yyyy hh:mm</mat-hint>
+          <mat-datepicker-toggle matSuffix  [for]="$any(to_selected_date2)"></mat-datepicker-toggle>
+          <ngx-mat-datetime-picker #to_selected_date2 [color]="color" [disableMinute]="false" [enableMeridian]="true"
+                                               [hideTime]="false"
+                                               [showSeconds]="false" [showSpinners]="true" [stepHour]="stepHour"
+                                               [stepMinute]="stepMinute" [stepSecond]="stepSecond" [touchUi]="false">
+                      </ngx-mat-datetime-picker>
+        </mat-form-field>
+      </div>
+      <div class="row-inputs">
+        <mat-form-field fxFlex="40" appearance="outline">
+          <mat-label>Seat number</mat-label>
+          <input matInput type="number" formControlName="seat_number">
+          <!--      <mat-error>{{error}}</mat-error>-->
+        </mat-form-field>
+        <mat-form-field fxFlex="40" appearance="outline">
+          <mat-label>Price</mat-label>
+          <input matInput type="number" formControlName="price">
+          <!--      <mat-error>{{error}}</mat-error>-->
+        </mat-form-field>
+      </div>
+      <div class="row-inputs button-footer">
+        <div>
+          <button mat-button color="accent">Go back to list</button>
+        </div>
+        <div>
+          <button mat-raised-button mat-stroked-button color="accent" (click)="bookTicket()">Book the ticket</button>
+        </div>
+
+
+      </div>
+    </form>
+
+  </mat-card>
+
+</div>
+

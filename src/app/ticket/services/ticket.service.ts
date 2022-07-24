@@ -1,27 +1,71 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {Ticket} from "@shared/models/ticket.model";
+import {AngularFirestore, DocumentChangeAction} from "@angular/fire/compat/firestore";
+import {Ticket, Types} from "@shared/models/ticket.model";
 import {HotToastService} from "@ngneat/hot-toast";
+import {BehaviorSubject, combineLatest, Observable, switchMap} from "rxjs";
+import firebase from "firebase/compat";
+import {TicketInt} from "@shared/entities/TicketInterface";
+import {AbstractControl} from "@angular/forms";
+import DocumentData = firebase.firestore.DocumentData;
+import CollectionReference = firebase.firestore.CollectionReference;
 
 @Injectable({
   providedIn: 'root'
 })
 export class TicketService {
+
   constructor(private db: AngularFirestore, private toast: HotToastService) {
+
   }
 
-  getTicketsList() {
-    return this.db.collection('tickets').snapshotChanges();
+
+
+
+  //   this.items$ = combineLatest(
+  //     this.sizeFilter$,
+  //     this.colorFilter$
+  //   ).pipe(
+  //     switchMap(([size, color]) =>
+  //       afs.collection('items', ref => {
+  //         let query : firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+  //         if (size) { query = query.where('size', '==', size) };
+  //         if (color) { query = query.where('color', '==', color) };
+  //         return query;
+  //       }).valueChanges()
+  //     )
+  //   );
+  // }
+  // filterBySize(size: string|null) {
+  //   this.sizeFilter$.next(size);
+  // }
+  // filterByColor(color: string|null) {
+  //   this.colorFilter$.next(color);
+  // }
+
+  getTicketsList(): Observable<DocumentChangeAction<TicketInt>[]> {
+    return this.db.collection<TicketInt>('tickets', ref => ref.orderBy('created_date', 'desc')).snapshotChanges();
   }
 
-  getFilteredTickets() {
-    return this.db.collection('tickets', ref => ref.where('ticket_type', '==', 'Economic')).valueChanges();
+
+  getTicketTypes(): Observable<DocumentChangeAction<Types>[]> {
+    return this.db.collection<Types>('types').snapshotChanges();
   }
+
+  getTypeById(id: string) {
+    return this.db.doc('types/' + id).snapshotChanges();
+  }
+
   // Create Ticket
-  addTicket(ticket: Ticket) {
+  addTicket(ticket: TicketInt) {
+    // delete ticket.id;
+    ticket.ticket_type = this.db.doc(`${ticket.ticket_type}`).ref
+    return this.db.collection('tickets').add(ticket)
+  }
+
+  addTypes(ticket: any) {
     // delete ticket.id;
     const d = Object.assign({}, ticket)
-    return this.db.collection('tickets').add(d)
+    return this.db.collection('types').add(d)
   }
 
   getTicket(id: string) {
@@ -82,4 +126,7 @@ export class TicketService {
   //   this.ticketRef = this.db.object('tickets/' + id);
   //   this.ticketRef.remove();
   // }
+  private buildQuery(query: CollectionReference<DocumentData>, value: AbstractControl<any>, key: string) {
+    return query.where(key, '==', String(value))
+  }
 }
