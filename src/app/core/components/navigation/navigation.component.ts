@@ -29,7 +29,7 @@ export class NavigationComponent implements OnInit {
   getScreenSize(event?: EventListener) {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
-    if(this.screenWidth<1000 && this.drawer.opened){
+    if(this.screenWidth<1000 && this.drawer?.opened){
       this.mode = 'push';
       this.drawer?.toggle();
       this.web = false;

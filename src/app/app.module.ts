@@ -46,7 +46,7 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 import {NgxSpinnerModule} from "ngx-spinner";
 import {AuthService} from "@core/services/auth-service/auth.service";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
-
+import {NgChartsModule } from 'ng2-charts';
 
 const MaterialModules = [
   MatIconModule,
@@ -77,6 +77,7 @@ const MaterialModules = [
   MatTabsModule,
   FlexLayoutModule,
   MatSlideToggleModule,
+  NgChartsModule
 ];
 
 @NgModule({

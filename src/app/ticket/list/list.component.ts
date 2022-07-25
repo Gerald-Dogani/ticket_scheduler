@@ -57,12 +57,12 @@ export class ListComponent implements OnInit {
       this.outbound$,
     ).pipe(switchMap(([fromDate, toDate, inbound, outbound]) => this.afs.collection<TicketInt>('tickets', ref => {
         let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
-        // if (fromDate) {
-        //   query = query.where('from_date', '==', fromDate)
-        // }
-        // if (toDate) {
-        //   query = query.where('to_date', '==', toDate)
-        // }
+        if (fromDate) {
+          query = query.where('from_date', '>', fromDate).orderBy('from_date')
+        }
+        if (toDate) {
+          query = query.where('to_date', '<', toDate).orderBy('to_date')
+        }
         if (inbound) {
           query = query.where('inbound', '==', inbound,)
         }
@@ -130,14 +130,20 @@ export class ListComponent implements OnInit {
 
     Object.keys(this.ticketSearchForm.controls).forEach(key => {
       if (this.ticketSearchForm.controls[key].value) {
-        // if (key == 'from_date') {
-        //   this.filterByFromDate(this.ticketSearchForm.controls[key].value);
-        // }
-        // if (key == 'to_date') {
-        //   this.filterByFromDate(this.ticketSearchForm.controls[key].value);
-        // }
-        if (key == 'inbound') {
+        if (key == 'from_date' && this.ticketSearchForm.controls[key].value) {
+          this.filterByFromDate(this.ticketSearchForm.controls[key].value);
+        }else {
+          this.filterByFromDate(false);
+        }
+        if (key == 'to_date' && this.ticketSearchForm.controls[key].value) {
+          this.filterByToDate(this.ticketSearchForm.controls[key].value);
+        }else{
+          this.filterByToDate(false);
+        }
+        if (key == 'inbound'&& this.ticketSearchForm.controls[key].value) {
           this.filterByInbound(this.ticketSearchForm.controls[key].value);
+        }else{
+          this.filterByInbound(false);
         }
       }
     })

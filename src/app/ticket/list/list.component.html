@@ -1,39 +1,46 @@
 <mat-card class="table-responsive table" [formGroup]="ticketForm">
   <div [formGroup]="ticketSearchForm">
-    <mat-form-field fxFlex="40" appearance="outline">
-      <mat-label>From date</mat-label>
-      <input (dateChange)="show($event)" matInput [max]="ticketSearchForm.controls['to_date'].value"
-             [ngxMatDatetimePicker]="to_selected_date1" placeholder="From date"
-             formControlName="from_date">
-      <mat-hint>dd/mm/yyyy hh:mm</mat-hint>
-      <mat-datepicker-toggle matSuffix [for]="$any(to_selected_date1)"></mat-datepicker-toggle>
-      <ngx-mat-datetime-picker #to_selected_date1 [color]="color" [disableMinute]="false" [enableMeridian]="true"
-                               [hideTime]="false"
-                               [showSeconds]="false" [showSpinners]="true" [stepHour]="stepHour"
-                               [stepMinute]="stepMinute" [stepSecond]="stepSecond" [touchUi]="false">
-      </ngx-mat-datetime-picker>
-    </mat-form-field>
+    <div class="row-inputs" fxLayout="row wrap">
+      <mat-form-field appearance="outline" fxFlex>
+        <mat-label>From date</mat-label>
+        <input (dateChange)="show($event)" matInput [max]="ticketSearchForm.controls['to_date'].value"
+               [ngxMatDatetimePicker]="to_selected_date1" placeholder="From date"
+               formControlName="from_date">
+        <mat-hint>dd/mm/yyyy hh:mm</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="$any(to_selected_date1)"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #to_selected_date1 [color]="color" [disableMinute]="false" [enableMeridian]="true"
+                                 [hideTime]="false"
+                                 [showSeconds]="false" [showSpinners]="true" [stepHour]="stepHour"
+                                 [stepMinute]="stepMinute" [stepSecond]="stepSecond" [touchUi]="false">
+        </ngx-mat-datetime-picker>
+      </mat-form-field>
 
-    <mat-form-field fxFlex="40" appearance="outline">
-      <mat-label>To date</mat-label>
-      <input (dateChange)="show($event)" matInput [min]="ticketSearchForm.controls['from_date'].value"
-             [ngxMatDatetimePicker]="to_selected_date2" placeholder="To date"
-             formControlName="to_date">
-      <mat-hint>dd/mm/yyyy hh:mm</mat-hint>
-      <mat-datepicker-toggle matSuffix [for]="$any(to_selected_date2)"></mat-datepicker-toggle>
-      <ngx-mat-datetime-picker #to_selected_date2 [color]="color" [disableMinute]="false" [enableMeridian]="true"
-                               [hideTime]="false"
-                               [showSeconds]="false" [showSpinners]="true" [stepHour]="stepHour"
-                               [stepMinute]="stepMinute" [stepSecond]="stepSecond" [touchUi]="false">
-      </ngx-mat-datetime-picker>
-    </mat-form-field>
-    <mat-form-field fxFlex="40" appearance="outline">
-      <mat-label>Inbound</mat-label>
-      <input matInput type="text" formControlName="inbound">
-      <!--      <mat-error>{{error}}</mat-error>-->
-    </mat-form-field>
-    <button type="button" (click)="searchTicket()"></button>
-    <button type="button" (click)="ngOnInit()"></button>
+      <mat-form-field appearance="outline" fxFlex>
+        <mat-label>To date</mat-label>
+        <input (dateChange)="show($event)" matInput [min]="ticketSearchForm.controls['from_date'].value"
+               [ngxMatDatetimePicker]="to_selected_date2" placeholder="To date"
+               formControlName="to_date">
+        <mat-hint>dd/mm/yyyy hh:mm</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="$any(to_selected_date2)"></mat-datepicker-toggle>
+        <ngx-mat-datetime-picker #to_selected_date2 [color]="color" [disableMinute]="false" [enableMeridian]="true"
+                                 [hideTime]="false"
+                                 [showSeconds]="false" [showSpinners]="true" [stepHour]="stepHour"
+                                 [stepMinute]="stepMinute" [stepSecond]="stepSecond" [touchUi]="false">
+        </ngx-mat-datetime-picker>
+      </mat-form-field>
+      <mat-form-field appearance="outline" fxFlex>
+        <mat-label>Inbound</mat-label>
+        <input matInput type="text" formControlName="inbound">
+        <!--      <mat-error>{{error}}</mat-error>-->
+      </mat-form-field>
+      <div class="search-button" fxFlex>
+        <button mat-raised-button  color="accent" type="button" (click)="searchTicket()">Search <mat-icon>search</mat-icon> </button>
+        <button mat-button  mat-stroked-button  color="accent" type="button" (click)="ngOnInit()">Clear<mat-icon>clear</mat-icon></button>
+      </div>
+
+    </div>
+
+
   </div>
   <br>
   <br>
