@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {AngularFirestore, DocumentChangeAction} from "@angular/fire/compat/firestore";
 import {Ticket, Types} from "@shared/models/ticket.model";
 import {HotToastService} from "@ngneat/hot-toast";
-import {BehaviorSubject, combineLatest, Observable, switchMap} from "rxjs";
+import {Observable} from "rxjs";
 import firebase from "firebase/compat";
 import {TicketInt} from "@shared/entities/TicketInterface";
 import {AbstractControl} from "@angular/forms";
@@ -43,7 +43,7 @@ export class TicketService {
   // }
 
   getTicketsList(): Observable<DocumentChangeAction<TicketInt>[]> {
-    return this.db.collection<TicketInt>('tickets', ref => ref.orderBy('created_date', 'desc')).snapshotChanges();
+    return this.db.collection<TicketInt>('Tickets', ref => ref.orderBy('created_date', 'desc')).snapshotChanges();
   }
 
 
@@ -59,7 +59,7 @@ export class TicketService {
   addTicket(ticket: TicketInt) {
     // delete ticket.id;
     ticket.ticket_type = this.db.doc(`${ticket.ticket_type}`).ref
-    return this.db.collection('tickets').add(ticket)
+    return this.db.collection('Tickets').add(ticket)
   }
 
   addTypes(ticket: any) {
@@ -69,17 +69,17 @@ export class TicketService {
   }
 
   getTicket(id: string) {
-    return this.db.collection('tickets/' + id).get();
+    return this.db.collection('Tickets/' + id).get();
   }
 
   // ToDo Update
   updateTicket(ticket: Ticket, id: string) {
-    this.db.collection('tickets/').doc(id).update(ticket);
+    this.db.collection('Tickets/').doc(id).update(ticket);
   }
 
   // ToDo Delete
   deleteTicket(id: string) {
-    this.db.collection('tickets/').doc(id).delete()
+    this.db.collection('Tickets/').doc(id).delete()
   }
 
   // addTicket(ticket: Ticket) {

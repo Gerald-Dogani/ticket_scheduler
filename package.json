@@ -37,6 +37,7 @@
     "ngx-permissions": "^13.0.1",
     "ngx-spinner": "^14.0.0",
     "node-sass": "^7.0.1",
+    "querybase": "^0.6.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "tslint-angular": "^3.0.3",
