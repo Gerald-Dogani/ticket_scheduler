@@ -6,18 +6,22 @@ import { ListComponent } from './list/list.component';
 import { FormComponent } from './form/form.component';
 import { DetailsComponent } from './details/details.component';
 import {SharedModule} from "@shared/shared.module";
+import {DashboardComponent} from "./dashboard/dashboard.component";
+import {NgChartsModule} from "ng2-charts";
 
 
 @NgModule({
   declarations: [
     ListComponent,
     FormComponent,
-    DetailsComponent
+    DetailsComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,
     TicketRoutingModule,
-    SharedModule
+    SharedModule,
+    NgChartsModule
   ],
   providers: [
     DatePipe

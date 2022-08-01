@@ -11,6 +11,7 @@ import {CustomDateAdapter} from "@shared/entities/CustomDateAdapter";
 import {scFormatDateTimeToTimeStamp} from "@shared/cons";
 import {LoaderService} from "@core/components/loader/services/loader.service";
 import {NgxSpinnerService} from "ngx-spinner";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-form',
@@ -27,6 +28,7 @@ export class FormComponent implements OnInit {
   createTicketForm: FormGroup = new FormGroup({})
   types: Types[] = [];
   color: ThemePalette = 'accent';
+  returnUrl:string = '-/list';
   today = new Date();
   stepHour = 1;
   stepMinute = 1;
@@ -37,7 +39,7 @@ export class FormComponent implements OnInit {
 
   constructor(public ticketService: TicketService, public loaderService: LoaderService, private snack: SnackBarService, public toast: HotToastService,
               public fb: FormBuilder, public ticketFormInit: TicketFormService, private dateAdapter: DateAdapter<Date>,
-              private loader: NgxSpinnerService,) {
+              private loader: NgxSpinnerService, private router: Router) {
     dateAdapter.setLocale('en-in');
   }
 
@@ -97,5 +99,9 @@ export class FormComponent implements OnInit {
         this.snack.onError(error);
       }
     })
+  }
+
+  goTo():void{
+    this.router.navigate([this.returnUrl]).then();
   }
 }

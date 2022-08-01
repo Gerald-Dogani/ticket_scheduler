@@ -1,4 +1,3 @@
-import {DashboardComponent} from "./dashboard/dashboard.component";
 import {NavigationComponent} from "./navigation/navigation.component";
 import {FooterComponent} from "@core/components/navigation/footer/footer.component";
 import {HeaderComponent} from "@core/components/navigation/header/header.component";
@@ -7,12 +6,10 @@ import {SpinLoaderComponent} from "@core/components/loader/components/spin-loade
 import {LoaderComponent} from "@core/components/loader/components/loader.component";
 
 
-export const components: any[] = [
-  DashboardComponent, NavigationComponent, FooterComponent, SpinLoaderComponent,
+export const components: any[] = [NavigationComponent, FooterComponent, SpinLoaderComponent,
   LoaderComponent, HeaderComponent, SidebarComponent
 ];
 
-export * from './dashboard/dashboard.component';
 export * from './navigation/navigation.component';
 export * from './navigation/footer/footer.component';
 export * from './navigation/header/header.component';

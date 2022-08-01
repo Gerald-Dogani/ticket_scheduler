@@ -36,7 +36,6 @@ import {AuthInterceptor} from "@core/interceptors/auth.interceptors";
 import {NgxPermissionsModule} from "ngx-permissions";
 import {SpinLoaderComponent} from "@core/components/loader/components/spin-loader/spin-loader.component";
 import {LoaderComponent} from "@core/components/loader/components/loader.component";
-import {NgChartsModule} from "ng2-charts";
 
 
 const MaterialModules = [
@@ -72,14 +71,13 @@ const MaterialModules = [
 
 @NgModule({
   declarations: [...fromComponents.components],
-  exports: [LoaderComponent,...fromComponents.components],
-    imports: [
-        CommonModule,
-        RouterModule,
-        NgxPermissionsModule.forRoot(),
-        ...MaterialModules,
-        NgChartsModule
-    ],
+  exports: [LoaderComponent, ...fromComponents.components],
+  imports: [
+    CommonModule,
+    RouterModule,
+    NgxPermissionsModule.forRoot(),
+    ...MaterialModules,
+  ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

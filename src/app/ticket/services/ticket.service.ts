@@ -68,6 +68,14 @@ export class TicketService {
     return this.db.collection('types').add(d)
   }
 
+  getAllUsers(){
+    return this.db.collection('users/').get();
+  }
+
+  getAllTickets(){
+    return this.db.collection('Tickets/').get();
+  }
+
   getTicket(id: string) {
     return this.db.collection('Tickets/' + id).get();
   }
