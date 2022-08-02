@@ -84,7 +84,7 @@ export class ListComponent implements OnInit {
   }
 
   goToEdit(index: number) {
-    window.open(`${this.url}-/details/${index}`, '_blank')
+    window.open(`${this.url}-/details/${index}/`, '_blank');
   }
 
 

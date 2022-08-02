@@ -60,7 +60,7 @@
         <span class="column-details-left">From date</span>
         <span class="column-details-left">To date</span>
         <span class="column-details-left">Seat number</span>
-        <span class="column-details-left">Edit</span>
+        <span class="column-details-left">Details</span>
       </div>
       <div class="table-header margin-left" *ngIf="i != 0 && width <=700">
         <span class="column-details-left">Id</span>
@@ -72,7 +72,7 @@
         <span class="column-details-left">From date</span>
         <span class="column-details-left">To date</span>
         <span class="column-details-left">Seat number</span>
-        <span class="column-details-left">Edit</span>
+        <span class="column-details-left">Details</span>
       </div>
       <div class="table-body margin-left">
         <span class="column-details-right" title="{{data.id}}">{{data.id}}</span>
@@ -88,7 +88,7 @@
           <br><span>{{data.to_date | dateFormat :'hh:mm:ss'}}</span></span>
         <span class="column-details-right" title="{{data.seat_number}}">{{data.seat_number}}</span>
         <span class="column-details-right edit-button">
-          <button mat-button (click)="goToEdit(data.id)"><mat-icon>edit</mat-icon></button></span>
+          <button mat-button (click)="goToEdit(data.id)"><mat-icon>details</mat-icon></button></span>
       </div>
       <!--      </div>-->
       <!--      <ng-container>-->

@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
+import {Ticket} from "@shared/models/ticket.model";
+import {TicketService} from "../services/ticket.service";
+import {log10} from "chart.js/helpers";
 
 @Component({
   selector: 'app-details',
@@ -7,9 +11,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailsComponent implements OnInit {
 
-  constructor() { }
+  returnUrl: string = '-/list';
+  ticketId: string | null = '0';
+  ticketDetail: Ticket = new Ticket()
 
-  ngOnInit(): void {
+  constructor(private route: ActivatedRoute, private router: Router, public ticketService: TicketService,) {
+    this.ticketId = this.route.snapshot.paramMap.get('id')
   }
 
+  ngOnInit(): void {
+    let docType = {};
+    let docTicket: Ticket | undefined = new Ticket();
+    if (this.ticketId) {
+      this.ticketService.getTicket(this.ticketId).snapshotChanges().subscribe(t => {
+        console.log(t)})
+      //   .subscribe(t =>{
+      //   console.log(t)
+      // })
+      //   .then(snap =>{
+      //   console.log(snap.docs.pop())
+      // })
+
+    } else {
+      this.goTo();
+    }
+  }
+
+  goTo(): void {
+    this.router.navigate([this.returnUrl]).then();
+  }
 }

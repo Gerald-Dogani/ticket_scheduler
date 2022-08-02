@@ -12,6 +12,7 @@ import {scFormatDateTimeToTimeStamp} from "@shared/cons";
 import {LoaderService} from "@core/components/loader/services/loader.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {Router} from "@angular/router";
+import {AngularFirestore} from "@angular/fire/compat/firestore";
 
 @Component({
   selector: 'app-form',
@@ -37,7 +38,8 @@ export class FormComponent implements OnInit {
   stepMinutes = [1, 5, 10, 15, 20, 25];
   stepSeconds = [1, 5, 10, 15, 20, 25];
 
-  constructor(public ticketService: TicketService, public loaderService: LoaderService, private snack: SnackBarService, public toast: HotToastService,
+  constructor(public ticketService: TicketService, public loaderService: LoaderService, private snack: SnackBarService,
+              public toast: HotToastService, public afs: AngularFirestore,
               public fb: FormBuilder, public ticketFormInit: TicketFormService, private dateAdapter: DateAdapter<Date>,
               private loader: NgxSpinnerService, private router: Router) {
     dateAdapter.setLocale('en-in');
@@ -45,7 +47,7 @@ export class FormComponent implements OnInit {
 
   ngOnInit(): void {
     this.initialData();
-    this.createTicketForm = this.ticketFormInit.initTicketUnit();
+    this.createTicketForm = this.ticketFormInit.initTicketUnit(this.afs);
   }
 
 
@@ -104,4 +106,6 @@ export class FormComponent implements OnInit {
   goTo():void{
     this.router.navigate([this.returnUrl]).then();
   }
+
+
 }

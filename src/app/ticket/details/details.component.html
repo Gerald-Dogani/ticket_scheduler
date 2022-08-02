@@ -1,1 +1,62 @@
-<p>details works!</p>
+<div class="form-card">
+  <div class="header-title">Ticket details</div>
+  <mat-card>
+
+    <div class="form">
+      <div class="row-inputs">
+        <div fxFlex="40">
+          <div>Inbound</div>
+          <div>{{ticketDetail.inbound}}</div>
+        </div>
+        <div fxFlex="40">
+          <div>Outbound</div>
+          <div>{{ticketDetail.outbound}}</div>
+        </div>
+      </div>
+      <div class="row-inputs">
+        <div fxFlex="40">
+          <div>Ticket type</div>
+          <div>{{ticketDetail.ticket_type}}</div>
+        </div>
+        <div fxFlex="40">
+          <div>Ticket type id</div>
+          <div>{{ticketDetail.ticket_type_id}}</div>
+        </div>
+      </div>
+      <div class="row-inputs">
+
+        <div fxFlex="40">
+          <div>From date</div>
+          <div>{{ticketDetail.from_date | dateFormat :'dd/MM/YYYY'}}
+            <br><span>{{ticketDetail.from_date | dateFormat :'hh:mm:ss'}}</span></div>
+        </div>
+
+        <div fxFlex="40">
+          <div>To date</div>
+          <div>{{ticketDetail.to_date | dateFormat :'dd/MM/YYYY'}}
+            <br><span>{{ticketDetail.to_date | dateFormat :'hh:mm:ss'}}</span></div>
+        </div>
+      </div>
+      <div class="row-inputs">
+        <div fxFlex="40">
+          <div>Seat number</div>
+          <div>{{ticketDetail.seat_number}}</div>
+        </div>
+        <div fxFlex="40">
+          <div>Price</div>
+          <div>{{ticketDetail.price}}</div>
+        </div>
+      </div>
+      <div class="button-footer">
+        <div>
+          <button mat-button color="accent" (click)="goTo()">Go back to list</button>
+        </div>
+
+
+      </div>
+    </div>
+
+  </mat-card>
+
+</div>
+

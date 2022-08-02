@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {AngularFirestore, DocumentChangeAction} from "@angular/fire/compat/firestore";
 import {Ticket, Types} from "@shared/models/ticket.model";
 import {HotToastService} from "@ngneat/hot-toast";
-import {Observable} from "rxjs";
+import {map, Observable, take} from "rxjs";
 import firebase from "firebase/compat";
 import {TicketInt} from "@shared/entities/TicketInterface";
 import {AbstractControl} from "@angular/forms";
@@ -69,15 +69,15 @@ export class TicketService {
   }
 
   getAllUsers(){
-    return this.db.collection('users/').get();
+    return this.db.collection('users/').valueChanges();
   }
 
   getAllTickets(){
-    return this.db.collection('Tickets/').get();
+    return this.db.collection('Tickets/').valueChanges();
   }
 
   getTicket(id: string) {
-    return this.db.collection('Tickets/' + id).get();
+    return this.db.doc<Ticket>(`Tickets/${id}`).collection(`types`).doc<Types>();
   }
 
   // ToDo Update

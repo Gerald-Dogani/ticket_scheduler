@@ -9,16 +9,17 @@ import {ChartDataset} from "chart.js";
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  barChartOptions = {
+  public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true
   };
-  barChartLabels = ['2022'];
-  barChartType = 'bar';
-  barChartLegend = true;
-  barChartData: ChartDataset[] = [
-    {data: [0], label: 'Users'},
-    {data: [0], label: 'Tickets'}
+  public barChartLabels = ['2022'];
+  public barChartType = 'bar';
+  public barChartPlugins = [];
+  public barChartLegend = true;
+  public barChartData: ChartDataset[] = [
+    {data: [0], label: 'Users', xAxisID: 'x1'},
+    {data: [0], label: 'Tickets', xAxisID: 'x2'}
   ];
 
   constructor(private loader: NgxSpinnerService, public ticketService: TicketService,) {
@@ -28,12 +29,13 @@ export class DashboardComponent implements OnInit {
     this.loader.hide()
     this.getAllTickets();
     this.getAllUsers();
+    // this.barChartOptions
   }
 
   getAllTickets() {
     this.ticketService.getAllTickets().subscribe(
       res => {
-        this.barChartData[1].data = [res.size]
+        this.barChartData[1].data = [res.length]
       }
     )
   }
@@ -41,7 +43,7 @@ export class DashboardComponent implements OnInit {
   getAllUsers() {
     this.ticketService.getAllUsers().subscribe(
       res => {
-        this.barChartData[0].data = [res.size]
+        this.barChartData[0].data = [res.length]
       }
     )
   }
