@@ -23,8 +23,16 @@ export class DetailsComponent implements OnInit {
     let docType = {};
     let docTicket: Ticket | undefined = new Ticket();
     if (this.ticketId) {
-      this.ticketService.getTicket(this.ticketId).snapshotChanges().subscribe(t => {
-        console.log(t)})
+      this.ticketService.getTicket(this.ticketId).subscribe( {
+        next:(t)=>{
+          if (t){
+            this.ticketDetail = t
+          }else {
+            this.goTo();
+          }
+        }
+
+      })
       //   .subscribe(t =>{
       //   console.log(t)
       // })

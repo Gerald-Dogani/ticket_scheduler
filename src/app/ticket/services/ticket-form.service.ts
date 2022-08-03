@@ -20,12 +20,28 @@ export class TicketFormService {
       inbound: new FormControl(null),
       outbound: new FormControl(null),
       ticket_type: new FormControl(null),
-      ticket_type_id: new FormControl({value:null, disabled:true}),
+      ticket_type_id: new FormControl(null),
       price: new FormControl(null),
       from_date: new FormControl(null),
       to_date: new FormControl(null),
       seat_number: new FormControl('123'),
       created_date: new FormControl(scFormatDateTimeToTimeStamp(date)),
+    })
+  }
+
+  initSearchTicketUnit(afs?: any): FormGroup {
+    const date: Date = new Date()
+    return this.fb.group({
+      // id: new FormControl(null),
+      inbound: new FormControl(null),
+      outbound: new FormControl(null),
+      // ticket_type: new FormControl(null),
+      // ticket_type_id: new FormControl({value:null, disabled:true}),
+      // price: new FormControl(null),
+      from_date: new FormControl({value:null, disabled:true}),
+      to_date: new FormControl({value:null, disabled:true}),
+      // seat_number: new FormControl(null),
+      // created_date: new FormControl(scFormatDateTimeToTimeStamp(date)),
     })
   }
 

@@ -51,24 +51,24 @@ export class ListComponent implements OnInit {
     this.inbound$ = new BehaviorSubject('');
     this.outbound$ = new BehaviorSubject('');
     this.items$ = combineLatest(
-      this.fromDateFilter$,
-      this.toDateFilter$,
-      // this.inbound$,
+      // this.fromDateFilter$,
+      // this.toDateFilter$,
+      this.inbound$,
       // this.outbound$,
-    ).pipe(switchMap(([fromDate, toDate]) => this.afs.collection<any>('Tickets', ref => {
-        let query: firebase.firestore.QuerySnapshot | firebase.firestore.Query = ref;
-        console.log(fromDate)
-        if (fromDate || toDate) {
-          query = query.where('from_date', '>', fromDate)
-        }
-        if (toDate) {
-          query = query.where('to_date', '<=', toDate)
-        }
-        // if (inbound) {
-        //   query = query.where('inbound', '==', inbound)
+    ).pipe(switchMap(([inbound]) => this.afs.collection<any>('Tickets', ref => {
+        let query: firebase.firestore.CollectionReference | firebase.firestore.Query = ref;
+        // console.log(fromDate)
+        // if (fromDate || toDate) {
+        //   query = query.where('from_date', '>', fromDate)
         // }
+        // if (toDate) {
+        //   query = query.where('to_date', '<=', toDate)
+        // }
+        if (inbound) {
+          query = query.where('inbound', '==', inbound)
+        }
         return query
-      }).valueChanges()
+      }).snapshotChanges()
     ))
 
   }
@@ -76,7 +76,7 @@ export class ListComponent implements OnInit {
   ngOnInit(): void {
     this.loader.show();
     this.width = window.innerWidth;
-    this.ticketSearchForm = this.ticketFormInit.initTicketUnit();
+    this.ticketSearchForm = this.ticketFormInit.initSearchTicketUnit();
     this.ticketForm = this.fb.group({
       ticket: this.fb.array([])
     })
@@ -131,12 +131,12 @@ export class ListComponent implements OnInit {
 
     Object.keys(this.ticketSearchForm.controls).forEach(key => {
       if (this.ticketSearchForm.controls[key].value) {
-        if (key == 'from_date' && this.ticketSearchForm.controls[key].value) {
-          this.filterByFromDate(this.ticketSearchForm.controls[key].value);
-        }
-        if (key == 'to_date' && this.ticketSearchForm.controls[key].value) {
-          this.filterByToDate(this.ticketSearchForm.controls[key].value);
-        }
+        // if (key == 'from_date' && this.ticketSearchForm.controls[key].value) {
+        //   this.filterByFromDate(this.ticketSearchForm.controls[key].value);
+        // }
+        // if (key == 'to_date' && this.ticketSearchForm.controls[key].value) {
+        //   this.filterByToDate(this.ticketSearchForm.controls[key].value);
+        // }
         if (key == 'inbound' && this.ticketSearchForm.controls[key].value) {
           this.filterByInbound(this.ticketSearchForm.controls[key].value);
         }

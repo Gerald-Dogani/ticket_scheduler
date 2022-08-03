@@ -1,7 +1,7 @@
 <mat-card class="table-responsive table" [formGroup]="ticketForm">
   <div [formGroup]="ticketSearchForm">
     <div class="row-inputs" fxLayout="row wrap">
-      <mat-form-field appearance="outline" fxFlex>
+      <mat-form-field matTooltip="Coming Soon" appearance="outline" fxFlex>
         <mat-label>From date</mat-label>
         <input (dateChange)="show($event)" matInput [max]="ticketSearchForm.controls['to_date'].value"
                [ngxMatDatetimePicker]="to_selected_date1" placeholder="From date"
@@ -15,7 +15,7 @@
         </ngx-mat-datetime-picker>
       </mat-form-field>
 
-      <mat-form-field appearance="outline" fxFlex>
+      <mat-form-field appearance="outline" fxFlex matTooltip="Coming Soon">
         <mat-label>To date</mat-label>
         <input (dateChange)="show($event)" matInput [min]="ticketSearchForm.controls['from_date'].value"
                [ngxMatDatetimePicker]="to_selected_date2" placeholder="To date"
@@ -88,7 +88,7 @@
           <br><span>{{data.to_date | dateFormat :'hh:mm:ss'}}</span></span>
         <span class="column-details-right" title="{{data.seat_number}}">{{data.seat_number}}</span>
         <span class="column-details-right edit-button">
-          <button mat-button (click)="goToEdit(data.id)"><mat-icon>details</mat-icon></button></span>
+          <button mat-button (click)="goToEdit(data.id)"><mat-icon>info</mat-icon></button></span>
       </div>
       <!--      </div>-->
       <!--      <ng-container>-->

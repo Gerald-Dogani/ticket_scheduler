@@ -43,7 +43,7 @@ export class TicketService {
   // }
 
   getTicketsList(): Observable<DocumentChangeAction<TicketInt>[]> {
-    return this.db.collection<TicketInt>('Tickets', ref => ref.orderBy('created_date', 'desc')).snapshotChanges();
+    return this.db.collection<TicketInt>('Tickets').snapshotChanges();
   }
 
 
@@ -77,7 +77,7 @@ export class TicketService {
   }
 
   getTicket(id: string) {
-    return this.db.doc<Ticket>(`Tickets/${id}`).collection(`types`).doc<Types>();
+    return this.db.doc<Ticket>(`Tickets/${id}`).valueChanges();
   }
 
   // ToDo Update

@@ -18,8 +18,8 @@ export class DashboardComponent implements OnInit {
   public barChartPlugins = [];
   public barChartLegend = true;
   public barChartData: ChartDataset[] = [
-    {data: [0], label: 'Users', xAxisID: 'x1'},
-    {data: [0], label: 'Tickets', xAxisID: 'x2'}
+    {data: [0], label: 'Users'},
+    {data: [0], label: 'Tickets'}
   ];
 
   constructor(private loader: NgxSpinnerService, public ticketService: TicketService,) {
